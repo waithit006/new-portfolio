@@ -285,8 +285,7 @@ export default function Home() {
 
         <ButtonDownload variant="outline-secondary" size="lg">Download Resume</ButtonDownload>
 
-
-      Hello! I’m Robert Smith. Senior Web Developer specializing in front end development. Experienced with all stages of the development cycle for dynamic web projects. Well-versed in numerous programming languages including JavaScript, SQL, and C. Stng background in project management and customer relations.
+          I'm Waithid Puttasomsri. Graduate of computer science with experience working across the full-stack web development.
       </TextSection>
       </div>
     </ContainerHome>

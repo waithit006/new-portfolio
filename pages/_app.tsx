@@ -43,6 +43,18 @@ function MyApp({ Component, pageProps }: AppProps) {
           .container {
             z-index:2;
           }
+
+          footer {
+            padding:5px;
+          }
+
+          
+          footer .copyrights {
+            display: block;
+            margin-bottom: 12px;
+            text-align: center;
+            font-size: 12px;
+          }
         `}
       </style>
       <style jsx>{
@@ -79,6 +91,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       {/* </Container> */}
       {/* <div className="backgroundCover"></div> */}
 
+      <footer>
+          <div className="copyrights">
+          © 2021 All rights reserved. Waithid Portfolio by Waithid
+          </div>
+      </footer>
     </>)
 }
 
