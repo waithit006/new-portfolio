@@ -34,3 +34,9 @@ export interface ExperienceInterface {
     position: string,
     responsibility: string[]
 }
+
+
+export interface SkillsInterface {
+    name:string,
+    icon:string
+}

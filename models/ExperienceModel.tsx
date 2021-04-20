@@ -3,18 +3,18 @@ import { ExperienceInterface } from '../interfaces'
 
 export default class ExperienceModel {
 
-    experiences: ExperienceInterface[]
+    skills: ExperienceInterface[]
 
     constructor(json) {
         json = json.map((responsibility: any) => {
             responsibility['responsibility'] = responsibility['responsibility'].map((val: any) => (val.responsibility))
             return responsibility
         })
-        this.experiences = json
+        this.skills = json
     }
 
     toAPIResponse(): ExperienceInterface[] {
-        return [...this.experiences]
+        return [...this.skills]
     }
 
 }
