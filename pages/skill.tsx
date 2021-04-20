@@ -1,6 +1,7 @@
 import { SectionTitle } from '../components/Utilities'
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import styled from 'styled-components'
+import Head from 'next/head'
 
 const SkillDIV = styled.div`
        text-align: center;

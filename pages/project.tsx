@@ -1,6 +1,7 @@
 import { SectionTitle } from '../components/Utilities'
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import styled from 'styled-components'
+import Head from 'next/head'
 
 const BlockProject = styled.div`
         box-shadow: 0 10px 30px rgb(0 0 0 / 19%), 0 6px 10px rgb(0 0 0 / 23%);

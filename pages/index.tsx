@@ -1,6 +1,10 @@
-import { Container, Row, Col,Button  } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import styled from 'styled-components'
 import Head from 'next/head'
+import { GetStaticProps } from 'next'
+import { HomeInterface } from '../interfaces'
+import { getHomeAPI } from '../api'
+import moment from 'moment'
 
 const ContainerHome = styled(Container)`
     display:flex;
@@ -212,83 +216,101 @@ const HeadBG = styled.div`
   }
 `
 
-export default function Home() {
+export default function Home(props: Props) {
+  const { homeData } = props
+
   return (
     <>
-    <Head>
+      <Head>
         <title>Waithid Portfolio - Home</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-    <HeadBG/>
-    <ContainerHome>
-      <div data-aos="fade-up" style={{ backgroundColor: 'transparent', width: '100%' }}>
-        <SectionProfile >
-          <BlockProfile>
-            <Row>
-              <Col sm={5}>
-                <ProfilePhoto>
-                  <img src="https://waithid-portfolio.herokuapp.com/profile.png" alt="picture Profile" />
-                </ProfilePhoto>
-              </Col>
-              <Col sm={7}>
-                <ProfileInfo>
-                  <ProfileTitle>Waithid Puttasomsri</ProfileTitle>
-                  <ProfilePosition>Fullstack Developer</ProfilePosition>
-                </ProfileInfo>
+      <HeadBG />
+      <ContainerHome>
+        <div data-aos="fade-up" style={{ backgroundColor: 'transparent', width: '100%' }}>
+          <SectionProfile >
+            <BlockProfile>
+              <Row>
+                <Col sm={5}>
+                  <ProfilePhoto>
+                    <img src={homeData.profile_img} alt="picture Profile" />
+                  </ProfilePhoto>
+                </Col>
+                <Col sm={7}>
+                  <ProfileInfo>
+                    <ProfileTitle>{homeData.name}</ProfileTitle>
+                    <ProfilePosition>{homeData.position}</ProfilePosition>
+                  </ProfileInfo>
 
-                <ProfileList>
-                  <li>
-                    <strong className="title">Date of birth</strong>
-                    <span className="cont">4 November 1996</span>
-                  </li>
-                  <li>
-                    <strong className="title">Age</strong>
-                    <span className="cont">25</span>
-                  </li>
-                  <li>
-                    <strong className="title">Nationality</strong>
-                    <span className="cont">Thai</span>
-                  </li>
-                  <li>
-                    <strong className="title">Language</strong>
-                    <span className="cont">
-                      Thai (Native), English (Intermediate)</span>
-                  </li>
-                  <li>
-                    <strong className="title">Phone</strong>
-                    <span className="cont">
-                      093-394-3986</span>
-                  </li>
+                  <ProfileList>
+                    <li>
+                      <strong className="title">Date of birth</strong>
+                      <span className="cont">{moment(homeData.birthdate, 'YYYY-MM-DD').format("DD MMM YYYY")}</span>
+                    </li>
+                    <li>
+                      <strong className="title">Age</strong>
+                      <span className="cont">{homeData.age}</span>
+                    </li>
+                    <li>
+                      <strong className="title">Nationality</strong>
+                      <span className="cont">{homeData.nationality}</span>
+                    </li>
+                    <li>
+                      <strong className="title">Language</strong>
+                      <span className="cont">
+                        {homeData.language}</span>
+                    </li>
+                    <li>
+                      <strong className="title">Phone</strong>
+                      <span className="cont">
+                        {homeData.phone}</span>
+                    </li>
 
-                  <li>
-                    <strong className="title">Email</strong>
-                    <span className="cont">
-                      waithit006@gmail.com</span>
-                  </li>
-                </ProfileList>
-              </Col>
-            </Row>
+                    <li>
+                      <strong className="title">Email</strong>
+                      <span className="cont">
+                        {homeData.email}</span>
+                    </li>
+                  </ProfileList>
+                </Col>
+              </Row>
 
-          </BlockProfile>
+            </BlockProfile>
 
-          <BlockLink>
+            <BlockLink>
 
-            <ul>
-              <li><a href="https://github.com/waithit006" target="_blank"><i className="fa fa-github" ></i></a></li>
-              <li><a href="https://www.facebook.com/waithid" target="_blank"><i className="fa fa-facebook-square"></i></a></li>
-              <li><a href="https://www.instagram.com/waithid07/" target="_blank"><i className="fa fa-instagram"></i></a></li>
-            </ul>
-          </BlockLink>
-        </SectionProfile>
+              <ul>
+                <li><a href={homeData.github_url} target="_blank"><i className="fa fa-github" ></i></a></li>
+                <li><a href={homeData.facebook_url} target="_blank"><i className="fa fa-facebook-square"></i></a></li>
+                <li><a href={homeData.instagram_url} target="_blank"><i className="fa fa-instagram"></i></a></li>
+              </ul>
+            </BlockLink>
+          </SectionProfile>
 
-      <TextSection>
+          <TextSection>
 
-        <ButtonDownload variant="outline-secondary" size="lg">Download Resume</ButtonDownload>
+            <ButtonDownload variant="outline-secondary" size="lg" onClick={() => window.open(homeData.resume_files, '_blank')}>Download Resume</ButtonDownload>
 
-          I'm Waithid Puttasomsri. Graduate of computer science with experience working across the full-stack web development.
-      </TextSection>
-      </div>
-    </ContainerHome>
+            {homeData.about_me}
+          </TextSection>
+        </div>
+      </ContainerHome>
     </>
   )
+}
+
+
+interface Props {
+  homeData: HomeInterface
+}
+
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const getHomeFromAPI = await getHomeAPI()
+
+  return {
+    props: {
+      homeData: { ...getHomeFromAPI.toAPIResponse() }
+    }
+  }
 }
