@@ -1,11 +1,12 @@
 import { SectionTitle } from '../components/Utilities'
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { ProjectInterface } from '../interfaces'
 import { getProjectAPI } from '../api'
-
+import ProjectView from '../components/ProjectView'
 
 const BlockProject = styled.div`
         box-shadow: 0 10px 30px rgb(0 0 0 / 19%), 0 6px 10px rgb(0 0 0 / 23%);
@@ -50,18 +51,30 @@ const ProjectTitle = styled.h3`
 
 export default function Project(props: Props) {
     const { projects } = props
+    const [show, setShow] = useState(false)
 
-    console.log(projects);
+    const [project, setProject] = useState<ProjectInterface>()
+
+    const toggleShow = () => {
+        setShow(!show)
+    }
+
+    const setProjectView = (value:ProjectInterface) =>{
+        toggleShow()
+        setProject(value)
+    }
 
     return (
         <Container className="pt-3">
             <SectionTitle>Project</SectionTitle>
 
+            <ProjectView isShow={show} toggleShow={toggleShow} project={project} />
+
             <Row>
                 {
                     projects.map((val, index) => (
                         <Col className="p-5" key={index} lg={6}>
-                            <BlockProject>
+                            <BlockProject onClick={() => setProjectView(val)}>
                                 <div className="block-media">
                                     <img src={val.images.length > 0 ? val.images[0] : ""} alt="" />
                                 </div>
@@ -72,7 +85,7 @@ export default function Project(props: Props) {
                                     </div>
                                     <ProjectTitle>
                                         {val.title_project}
-                        </ProjectTitle>
+                                    </ProjectTitle>
                                 </BlockProjectDetail>
                             </BlockProject>
                         </Col>

@@ -44,3 +44,19 @@ a {
 .timeline-card-content {
     min-height: 10px !important;
 }
+
+.carousel .thumb img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.carousel .slide:hover {
+    cursor: pointer !important;
+}
+
+.carousel .slide img {
+    max-height: 300px;
+    width: auto;
+    object-fit: cover;
+    object-position: top;
+}
