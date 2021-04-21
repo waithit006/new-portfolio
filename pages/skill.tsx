@@ -52,8 +52,8 @@ export default function Skills(props: Props) {
 
             <Row className="mt-3 mb-3">
                 {
-                    skills.map((skill) => (
-                        <Col md={2} sm={4} xs={4}>
+                    skills.map((skill,index) => (
+                        <Col key={index} md={2} sm={4} xs={4}>
                             <SkillDIV>
                                 <div className="skill-image">
                                     <img src={skill.icon} alt="" />

@@ -37,6 +37,14 @@ export interface ExperienceInterface {
 
 
 export interface SkillsInterface {
-    name:string,
-    icon:string
+    name: string,
+    icon: string
+}
+
+
+export interface ProjectInterface {
+    title_project: string,
+    detail: string,
+    tech: string[],
+    images: string[]
 }
