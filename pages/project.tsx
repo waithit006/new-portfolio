@@ -11,7 +11,7 @@ import ProjectView from '../components/ProjectView'
 const BlockProject = styled.div`
         box-shadow: 0 10px 30px rgb(0 0 0 / 19%), 0 6px 10px rgb(0 0 0 / 23%);
         cursor: pointer;
-
+        height:100%;
         .block-media{
             overflow: hidden;
             position: relative;
@@ -21,6 +21,8 @@ const BlockProject = styled.div`
         img{
             width:100%;
             transition: opacity 1s, transform 1s;
+           height:300px;
+           object-fit:scale-down;
         }
 
         img:hover{
@@ -59,7 +61,7 @@ export default function Project(props: Props) {
         setShow(!show)
     }
 
-    const setProjectView = (value:ProjectInterface) =>{
+    const setProjectView = (value: ProjectInterface) => {
         toggleShow()
         setProject(value)
     }
