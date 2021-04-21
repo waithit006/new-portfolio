@@ -57,6 +57,6 @@ a {
 .carousel .slide img {
     max-height: 300px;
     width: auto;
-    object-fit: cover;
+    object-fit: scale-down;
     object-position: top;
 }
